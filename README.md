@@ -8,7 +8,7 @@ AI-powered Plant Disease Detection Web Application using **EfficientNetB0, Flask
 # 📸 DEMO Images Preview
 
 ## 🏠 Home Page
-![Home Page]([demo_images\Home_Page.png](https://github.com/Prasad-j1/AI-Based-Plant-Disease-Detection-using-DL/blob/main/demo_images/Home_Page.png))
+![Home Page]([demo_images\Home_Page.png)
 
 ---
 
