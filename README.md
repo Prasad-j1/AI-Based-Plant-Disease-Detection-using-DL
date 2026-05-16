@@ -24,6 +24,7 @@ AI-powered Plant Disease Detection Web Application using **EfficientNetB0, Flask
 ## 📊 Result Page
 ![Result Page](demo_images\Result_Page.png)
 
+
 ## 📊 Information Page
 ![Result Page](demo_images/Information.png)
 
