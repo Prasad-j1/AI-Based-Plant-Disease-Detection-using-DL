@@ -27,3 +27,14 @@ plantvillage dataset/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Uploads
+app/static/uploads/
+
+# Generated GradCAM images
+gradcam_*
+
+# Personal/Test Images
+*.jpeg
+*.jpg
+*.png
