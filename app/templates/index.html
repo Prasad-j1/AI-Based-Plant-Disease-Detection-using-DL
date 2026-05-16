@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroVision AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: #0f172a; color: white; scroll-behavior: smooth; }
+    nav { display: flex; justify-content: space-between; padding: 20px 10%; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); position: fixed; width: 100%; z-index: 1000; }
+    nav ul { display: flex; list-style: none; gap: 25px; }
+    nav a { text-decoration: none; color: white; font-weight: 500; transition: 0.3s; }
+    nav a:hover { color: #4ade80; }
+    .hero { height: 100vh; background: linear-gradient(135deg, #065f46, #0f172a, #1e3a8a); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
+    .hero h1 { font-size: 3rem; background: linear-gradient(90deg, #4ade80, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { margin-top: 20px; font-size: 1.2rem; opacity: 0.8; }
+    .btn { margin-top: 30px; padding: 15px 35px; border-radius: 50px; border: none; cursor: pointer; font-size: 1rem; font-weight: 600; background: linear-gradient(90deg, #22d3ee, #4ade80); color: black; transition: 0.4s; }
+    .cta a .btn_prediction{ margin-top: 50px; padding: 15px 35px; border-radius: 50px; border: none; cursor: pointer; font-size: 1rem; font-weight: 600; background: linear-gradient(90deg, #22d3ee, #4ade80); color: black; transition: 0.4s; }
+    .btn:hover { transform: scale(1.1); 
+      box-shadow: 0 0 20px #4ade80;
+    }
+    .section { 
+      padding: 100px 10%; 
+      text-align: center; 
+    }
+    .features { 
+      display: flex; 
+      justify-content: center; 
+      gap: 30px; 
+      flex-wrap: wrap;
+     }
+    .card { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 20px; width: 300px; transition: 0.4s; }
+    .card:hover { transform: translateY(-10px); box-shadow: 0 0 20px #22d3ee; }
+    .steps { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+    .step { width: 250px; }
+    .testimonial { max-width: 600px; margin: auto; font-style: italic; font-size: 1.1rem; margin-top: 40px; }
+    .faq-item { margin-bottom: 20px; text-align: left; cursor: pointer; }
+    .faq-answer { display: none; margin-top: 10px; opacity: 0.8; }
+    .cta { background: linear-gradient(90deg, #22d3ee, #4ade80); padding: 80px 10%; text-align: center; color: black; }
+    /* .cta a {margin-top: 140px;} */
+    .newsletter input { padding: 12px; width: 250px; border-radius: 25px; border: none; margin-right: 10px; }
+    footer { padding: 40px 10%; text-align: center; background: #020617; opacity: 0.8; }
+    @media(max-width: 768px) { .features, .steps { flex-direction: column; align-items: center; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <h2>🌿 AgroVision AI</h2>
+  <ul>
+    <li><a href="{{ url_for('home') }}">Home</a></li>
+    <li><a href="{{ url_for('predict_page') }}">Predict Disease</a></li>
+    <li><a href="{{ url_for('about') }}">About</a></li>
+    <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+    <li><a href="#">FAQ</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <h1>AI-Powered Plant Disease Detection</h1>
+  <p>Smart • Fast • Accurate • Secure</p>
+  <a href="{{ url_for('predict_page') }}" class="btn">Try Now</a>
+</section>
+
+<section class="section">
+  <h2>Core Features</h2>
+  <div class="features">
+    <div class="card"><h3>📤 Drag & Drop Upload</h3><p>Upload plant images instantly with seamless interaction.</p></div>
+    <div class="card"><h3>⚡ Instant Prediction</h3><p>Get AI-powered disease detection with confidence score.</p></div>
+    <div class="card"><h3>🔒 Secure & Private</h3><p>Enterprise-grade data protection and privacy.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>How It Works</h2>
+  <div class="steps">
+    <div class="step"><h3>1️⃣ Upload</h3><p>Upload your plant image.</p></div>
+    <div class="step"><h3>2️⃣ AI Analysis</h3><p>Our deep learning model analyzes it.</p></div>
+    <div class="step"><h3>3️⃣ Results</h3><p>Get instant disease prediction.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>What Users Say</h2>
+  <div class="testimonial" id="testimonial">"Amazing accuracy! Helped save my crops."</div>
+</section>
+
+<section class="section">
+  <h2>FAQ</h2>
+  <div class="faq-item">
+    <h4>What images can I upload?</h4>
+    <div class="faq-answer">Clear plant leaf images in JPG or PNG format.</div>
+  </div>
+  <div class="faq-item">
+    <h4>How accurate is the AI?</h4>
+    <div class="faq-answer">Our ResNet50 model achieves high validation accuracy.</div>
+  </div>
+  <div class="faq-item">
+    <h4>Is my data secure?</h4>
+    <div class="faq-answer">Yes, we do not store your uploaded images.</div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Ready to Detect Plant Diseases Instantly?</h2>
+  <a href="{{ url_for('predict_page') }}" class="btn_prediction">Start Prediction</a>
+</section>
+
+<section class="section newsletter">
+  <h2>Subscribe for Updates</h2>
+  <input type="email" placeholder="Enter your email">
+  <button class="btn" onclick="subscribe()">Subscribe</button>
+</section>
+
+<footer>© 2026 AgroVision AI | Built with ❤️ using Deep Learning</footer>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const answer = item.querySelector('.faq-answer');
+      answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+    });
+  });
+  const testimonials = ['"Amazing accuracy! Helped save my crops."', '"Fast and reliable AI detection system!"', '"A must-have tool for modern farmers."'];
+  let index = 0;
+  setInterval(() => { index = (index + 1) % testimonials.length; document.getElementById("testimonial").innerText = testimonials[index]; }, 3000);
+  function subscribe() { alert("🎉 Thank you for subscribing!"); }
+</script>
+</body>
+</html>

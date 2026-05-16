@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prediction Result | AgroVision AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: #0f172a; color: white; }
+    nav { display: flex; justify-content: space-between; padding: 20px 10%; background: rgba(0,0,0,0.3); }
+    nav ul { display: flex; list-style: none; gap: 25px; }
+    nav a { text-decoration: none; color: white; }
+    .header { text-align: center; padding: 60px 20px; background: linear-gradient(135deg, #22d3ee, #4ade80); color: black; }
+    .header h1 { font-size: 2.5rem; }
+    .container { display: flex; justify-content: center; gap: 40px; padding: 60px 10%; flex-wrap: wrap; }
+    .card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; width: 350px; text-align: center; box-shadow: 0 0 20px rgba(74,222,128,0.3); }
+    .card img { width: 100%; border-radius: 15px; }
+    .result-card { margin-top: 40px; background: linear-gradient(135deg, #065f46, #1e3a8a); padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 0 25px #22d3ee; }
+    .result-card h2 { font-size: 1.8rem; }
+    .result-card p { margin-top: 15px; font-size: 1.1rem; }
+    .btn { margin-top: 30px; padding: 15px 35px; border-radius: 50px; border: none; cursor: pointer; font-size: 1rem; font-weight: 600; background: linear-gradient(90deg, #22d3ee, #4ade80); color: black; transition: 0.3s; text-decoration: none; display: inline-block; }
+    .btn:hover { transform: scale(1.1); box-shadow: 0 0 20px #4ade80; }
+    .section { padding: 60px 10%; text-align: center; }
+    .faq-item { margin-top: 20px; text-align: left; cursor: pointer; }
+    .faq-answer { display: none; opacity: 0.8; margin-top: 10px; }
+    footer { text-align: center; padding: 30px; background: #020617; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <h2>🌿 AgroVision AI</h2>
+  <ul>
+    <li><a href="{{ url_for('home') }}">Home</a></li>
+    <li><a href="{{ url_for('predict_page') }}">Predict Disease</a></li>
+    <li><a href="{{ url_for('about') }}">About</a></li>
+  </ul>
+</nav>
+
+<section class="header">
+  <h1>Your Prediction Result is Ready!</h1>
+  <p>AI-powered disease classification complete.</p>
+</section>
+
+<div class="container">
+  <div class="card">
+    <h3>Your Input Image</h3>
+    <img src="{{ image_path }}" alt="Uploaded Image">
+  </div>
+
+  <div class="card">
+    <h3>AI Explanation (Grad-CAM)</h3>
+    <img src="{{ gradcam_path }}" width="300" alt="Grad-CAM Visualization">
+  </div>
+</div>
+
+<div class="section">
+  <div class="result-card">
+    <h2>Disease: <span>{{ prediction }}</span></h2>
+    <p>Confidence Score: <span>{{ confidence }}</span></p>
+    <p>🌿 Your plant can be treated early. Take recommended action promptly.</p>
+    <a href="{{ url_for('predict_page') }}" class="btn">Try Another Prediction</a>
+  </div>
+</div>
+
+
+<!-- ============================= -->
+<!-- NEW SECTION : DISEASE DETAILS -->
+<!-- ============================= -->
+
+{% if disease_details %}
+
+<section class="section">
+
+  <h2>Disease Information</h2>
+
+  <div class="container">
+
+    <div class="card">
+      <h3>Scientific Name</h3>
+      <p>{{ disease_details.scientific_name }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Description</h3>
+      <p>{{ disease_details.description }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Symptoms</h3>
+      <ul>
+        {% for item in disease_details.symptoms %}
+        {{ item }}
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Causes</h3>
+      <ul>
+        {% for item in disease_details.causes %}
+        {{ item }}
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Treatment</h3>
+      <ul>
+        {% for item in disease_details.treatment %}
+        {{ item }}
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Prevention</h3>
+      <ul>
+        {% for item in disease_details.prevention %}
+        {{ item }}
+        {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+
+</section>
+
+{% endif %}
+
+
+<section class="section">
+  <h2>FAQ</h2>
+  <div class="faq-item">
+    <h4>What is Grad-CAM?</h4>
+    <div class="faq-answer">Grad-CAM shows which part of the image influenced the AI decision.</div>
+  </div>
+  <div class="faq-item">
+    <h4>How accurate is this prediction?</h4>
+    <div class="faq-answer">Our ResNet50 model achieved high validation accuracy.</div>
+  </div>
+  <div class="faq-item">
+    <h4>What should I do next?</h4>
+    <div class="faq-answer">Consult agricultural guidelines for disease treatment.</div>
+  </div>
+</section>
+
+<footer>© 2026 AgroVision AI</footer>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const answer = item.querySelector('.faq-answer');
+      answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual Environment
+venv/
+env/
+
+# Dataset
+dataset/
+plantvillage dataset/
+
+# Model files
+*.h5
+*.keras
+*.pt
+*.pth
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
